@@ -10,6 +10,7 @@ import { Component, compile, htmlSafe } from '../../utils/helpers';
 import { strip } from '../../utils/abstract-test-case';
 import { moduleFor, RenderingTest } from '../../utils/test-case';
 import { classes, equalTokens, equalsElement, styles } from '../../utils/test-helpers';
+import { EMBER_ANGLE_BRACKET_INVOCATION } from '@ember/canary-features';
 
 moduleFor(
   'Components test: curly components',
@@ -3702,4 +3703,28 @@ if (jQueryDisabled) {
       }
     }
   );
+}
+
+
+if (EMBER_ANGLE_BRACKET_INVOCATION) {
+  moduleFor('RFC#311 AngleBracket Ivocation', class extends RenderingTest {
+    ['@test Angle bracket invocation']() {
+      this.registerComponent('foo-bar', {
+        ComponentClass: Component.extend({ name: 'Chad' }),
+        template: 'Hi {{name}}!'
+      });
+
+      this.render('<FooBar />');
+      this.assertText('Hi Chad!');
+    }
+
+    ['@test Angle bracket invocation with arguments']() {
+      this.registerComponent('foo-bar', {
+        template: 'Hi {{@name}}!'
+      });
+
+      this.render('<FooBar @name="Godfrey" />');
+      this.assertText('Hi Godfrey!');
+    }
+  });
 }
