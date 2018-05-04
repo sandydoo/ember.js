@@ -20,7 +20,7 @@ export default function assertSplattributeExpressions(env) {
 
 function errorMessage() {
   if (EMBER_ANGLE_BRACKET_INVOCATION) {
-    return `Using "...attributes" can only be used in the element position e.g. <div ...attributes />.`;
+    return `Using "...attributes" can only be used in the element position e.g. <div ...attributes />. It cannot be used as a path.`;
   }
 
   return `...attributes is an invalid path`;
