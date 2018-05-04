@@ -8,7 +8,7 @@ if (EMBER_ANGLE_BRACKET_INVOCATION) {
     class extends AbstractTestCase {
       '@test ...attributes is valid in element space'() {
         compile('<div ...attributes>Foo</div>');
-        this.assert.ok(true);
+        this.assert.ok(false);
       }
       '@test {{...attributes}} is not valid'() {
         expectAssertion(() => {
