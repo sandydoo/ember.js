@@ -4,6 +4,7 @@ import { DEBUG } from '@glimmer/env';
 import { assert, deprecate } from '@ember/debug';
 import { getPossibleMandatoryProxyValue, _getPath as getPath } from './property_get';
 import { notifyPropertyChange } from './property_events';
+import { DESCRIPTOR_VALUES } from '@ember/deprecated-features';
 
 import { isPath } from './path_cache';
 import { meta, peekMeta, descriptorFor, isDescriptor } from 'ember-meta';
@@ -78,8 +79,7 @@ export function set(obj, keyName, value, tolerant) {
     currentValue = obj[keyName];
   }
 
-  // TODO turn if block into a sveltable deprecated block
-  if (isDescriptor(currentValue)) {
+  if (DESCRIPTOR_VALUES && isDescriptor(currentValue)) {
     deprecate(
       `[DEPRECATED] computed property '${keyName}' was not set on object '${toString(
         obj
