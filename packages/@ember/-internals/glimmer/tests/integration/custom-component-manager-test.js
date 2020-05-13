@@ -1,6 +1,6 @@
 import { moduleFor, RenderingTestCase, runTask, strip } from 'internal-test-helpers';
 
-import { Object as EmberObject } from '@ember/-internals/runtime';
+import { Object as EmberObject, A as EmberArray } from '@ember/-internals/runtime';
 import { set, setProperties, computed } from '@ember/-internals/metal';
 import { setComponentManager, capabilities } from '@ember/-internals/glimmer';
 
@@ -666,6 +666,61 @@ moduleFor(
       runTask(() => this.context.set('value', 'bar'));
       assert.deepEqual(updated, [{ id: 'no-id' }, { id: 'static-id' }, { id: 'dynamic-id' }]);
       assert.verifySteps(['updateComponent', 'updateComponent', 'updateComponent']);
+    }
+
+    ['@test pushing to an array in an {{each}} helper does not fire updateComponent'](assert) {
+      let updated = [];
+
+      class TestManager {
+        static create() {
+          return new TestManager();
+        }
+
+        capabilities = capabilities('3.13', {
+          updateHook: true,
+        });
+
+        createComponent(_factory, args) {
+          assert.step('createComponent');
+          return { id: args.named.id || 'no-id' };
+        }
+
+        updateComponent(component) {
+          assert.step('updateComponent');
+          updated.push(component);
+        }
+
+        getContext(component) {
+          assert.step('getContext');
+          return component;
+        }
+      }
+
+      let ComponentClass = setComponentManager(() => new TestManager(), {});
+
+      this.registerComponent('foo-bar', {
+        template: '{{yield}}',
+        ComponentClass,
+      });
+
+      this.render(
+        strip`
+          {{#each this.list as |item|}}
+            [<FooBar @id={{item.id}}>{{item.value}}</FooBar>]
+          {{/each}}
+        `,
+        {
+          list: EmberArray([{ id: 'static-id', value: 'one' }, { id: 'static-id', value: 'two' }]),
+        }
+      );
+
+      this.assertHTML(`[one][two]`);
+      assert.deepEqual(updated, []);
+      assert.verifySteps(['createComponent', 'getContext', 'createComponent', 'getContext']);
+
+      runTask(() => this.context.list.pushObject({ id: 'dynamic-id', value: 'three' }));
+      assert.deepEqual(updated, [{ id: 'dynamic-id' }]);
+      assert.verifySteps(['createComponent', 'getContext']);
     }
 
     ['@test updating arguments does not trigger updateComponent or didUpdateComponent if `updateHook` is false'](
