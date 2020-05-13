@@ -668,6 +668,67 @@ moduleFor(
       assert.verifySteps(['updateComponent', 'updateComponent', 'updateComponent']);
     }
 
+    ['@test updating a key/value pair in an {{each-in}} helper fires updateComponent once'](assert) {
+      let updated = [];
+
+      class TestManager {
+        static create() {
+          return new TestManager();
+        }
+
+        capabilities = capabilities('3.13', {
+          updateHook: true,
+        });
+
+        createComponent(_factory, args) {
+          assert.step('createComponent');
+          console.log('creating?', args.named.id);
+          return { id: args.named.id || 'no-id' };
+        }
+
+        updateComponent(component) {
+          assert.step('updateComponent');
+          updated.push(component);
+        }
+
+        getContext(component) {
+          assert.step('getContext');
+          return component;
+        }
+      }
+
+      let ComponentClass = setComponentManager(() => new TestManager(), {});
+
+      this.registerComponent('foo-bar', {
+        template: '{{yield}}',
+        ComponentClass,
+      });
+
+      this.render(
+        strip`
+          {{#each-in this.object as |id value|}}
+            [<FooBar @id={{id}}>{{value}}</FooBar>]
+          {{/each-in}}
+        `,
+        { object: { 'static-id-one': 'one', 'static-id-two': 'two', 'dynamic-id': 'three' } }
+      );
+
+      this.assertHTML(`[one][two][three]`);
+      assert.deepEqual(updated, []);
+      assert.verifySteps([
+        'createComponent',
+        'getContext',
+        'createComponent',
+        'getContext',
+        'createComponent',
+        'getContext',
+      ]);
+
+      runTask(() => set(this.context.object, 'dynamic-id', 'test'));
+      assert.deepEqual(updated, [{ id: 'dynamic-id' }]);
+      assert.verifySteps(['updateComponent']);
+    }
+
     ['@test pushing to an array in an {{each}} helper does not fire updateComponent'](assert) {
       let updated = [];
 
