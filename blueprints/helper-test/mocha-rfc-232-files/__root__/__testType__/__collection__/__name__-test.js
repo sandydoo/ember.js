@@ -4,11 +4,11 @@ import { setupRenderingTest } from 'ember-mocha';
 import { render } from '@ember/test-helpers';
 <%= hbsImportStatement %>
 
-describe('<%= friendlyTestName %>', function() {
+describe('<%= friendlyTestName %>', function () {
   setupRenderingTest();
 
   // TODO: Replace this with your real tests.
-  it('renders', async function() {
+  it('renders', async function () {
     this.set('inputValue', '1234');
 
     await render(hbs`{{<%= dasherizedModuleName %> this.inputValue}}`);
@@ -18,10 +18,10 @@ describe('<%= friendlyTestName %>', function() {
 });<% } else if (testType == 'unit') { %>import { describe, it } from 'mocha';
 import { <%= camelizedModuleName %> } from '<%= dasherizedPackageName %>/helpers/<%= dasherizedModuleName %>';
 
-describe('<%= friendlyTestName %>', function() {
+describe('<%= friendlyTestName %>', function () {
 
   // TODO: Replace this with your real tests.
-  it('works', function() {
+  it('works', function () {
     let result = <%= camelizedModuleName %>(42);
     expect(result).to.be.ok;
   });

@@ -7,10 +7,10 @@ describeComponent('<%= dasherizedModuleName %>', 'helper:<%= dasherizedModuleNam
   {
     integration: true
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Handle any actions with this.on('myAction', function (val) { ... });
       // Template block usage:
       // this.render(hbs`
       //   {{#<%= dasherizedModuleName %>}}
@@ -28,10 +28,10 @@ describeComponent('<%= dasherizedModuleName %>', 'helper:<%= dasherizedModuleNam
 <% } else if (testType == 'unit') { %>import { describe, it } from 'mocha';
 import { <%= camelizedModuleName %> } from '<%= dasherizedPackageName %>/helpers/<%= dasherizedModuleName %>';
 
-describe('<%= friendlyTestName %>', function() {
+describe('<%= friendlyTestName %>', function () {
 
   // TODO: Replace this with your real tests.
-  it('works', function() {
+  it('works', function () {
     let result = <%= camelizedModuleName %>(42);
     expect(result).to.be.ok;
   });

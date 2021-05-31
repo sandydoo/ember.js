@@ -7,9 +7,9 @@ moduleForComponent('<%= componentPathName %>', '<%= friendlyTestDescription %>',
   unit: true<% } %>
 });
 
-test('it renders', function(assert) {
+test('it renders', function (assert) {
   <% if (testType === 'integration' ) { %>// Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  // Handle any actions with this.on('myAction', function (val) { ... });
 
   this.render(hbs`<%= selfCloseComponent(componentName) %>`);
 

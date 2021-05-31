@@ -6,7 +6,7 @@ moduleForComponent('<%= dasherizedModuleName %>', 'helper:<%= dasherizedModuleNa
 });
 
 // TODO: Replace this with your real tests.
-test('it renders', function(assert) {
+test('it renders', function (assert) {
   this.set('inputValue', '1234');
 
   this.render(hbs`{{<%= dasherizedModuleName %> this.inputValue}}`);
@@ -19,7 +19,7 @@ import { module, test } from 'qunit';
 module('<%= friendlyTestName %>');
 
 // TODO: Replace this with your real tests.
-test('it works', function(assert) {
+test('it works', function (assert) {
   let result = <%= camelizedModuleName %>([42]);
   assert.ok(result);
 });

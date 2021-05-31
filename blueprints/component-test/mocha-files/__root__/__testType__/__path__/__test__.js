@@ -8,10 +8,10 @@ describeComponent('<%= componentPathName %>', '<%= friendlyTestDescription %>',
     // needs: ['component:foo', 'helper:bar'],
     unit: true<% } %>
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       <% if (testType === 'integration' ) { %>// Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Handle any actions with this.on('myAction', function (val) { ... });
 
       this.render(hbs`<%= selfCloseComponent(componentName) %>`);
       expect(this.$()).to.have.length(1);
