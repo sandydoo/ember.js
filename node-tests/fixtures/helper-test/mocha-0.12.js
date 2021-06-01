@@ -3,14 +3,14 @@ import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-describe('Integration | Helper | foo/bar-baz', function() {
+describe('Integration | Helper | foo/bar-baz', function () {
   setupComponentTest('foo/bar-baz', {
     integration: true
   });
 
-  it('renders', function() {
+  it('renders', function () {
     // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Handle any actions with this.on('myAction', function (val) { ... });
     // Template block usage:
     // this.render(hbs`
     //   {{#foo/bar-baz}}
@@ -24,4 +24,3 @@ describe('Integration | Helper | foo/bar-baz', function() {
     expect(this.$().text().trim()).to.equal('1234');
   });
 });
-

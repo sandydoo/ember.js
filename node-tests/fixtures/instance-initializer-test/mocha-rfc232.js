@@ -4,8 +4,8 @@ import Application from '@ember/application';
 import { initialize } from 'my-app/instance-initializers/foo';
 import { run } from '@ember/runloop';
 
-describe('Unit | Instance Initializer | foo', function() {
-  beforeEach(function() {
+describe('Unit | Instance Initializer | foo', function () {
+  beforeEach(function () {
     this.TestApplication = Application.extend();
     this.TestApplication.instanceInitializer({
       name: 'initializer under test',
@@ -14,13 +14,13 @@ describe('Unit | Instance Initializer | foo', function() {
     this.application = this.TestApplication.create({ autoboot: false });
     this.instance = this.application.buildInstance();
   });
-  afterEach(function() {
+  afterEach(function () {
     run(this.instance, 'destroy');
     run(this.application, 'destroy');
   });
 
   // TODO: Replace this with your real tests.
-  it('works', async function() {
+  it('works', async function () {
     await this.instance.boot();
 
     expect(true).to.be.ok;

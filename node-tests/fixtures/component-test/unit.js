@@ -6,7 +6,7 @@ moduleForComponent('x-foo', 'Unit | Component | x-foo', {
   unit: true
 });
 
-test('it renders', function(assert) {
+test('it renders', function (assert) {
   
   // Creates the component instance
   /*let component =*/ this.subject();

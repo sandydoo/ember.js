@@ -6,10 +6,10 @@ describeComponent('x-foo', 'Integration | Component | x-foo',
   {
     integration: true
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Handle any actions with this.on('myAction', function (val) { ... });
 
       this.render(hbs`<XFoo />`);
       expect(this.$()).to.have.length(1);

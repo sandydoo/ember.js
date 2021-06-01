@@ -7,8 +7,8 @@ describeComponent('x-foo', 'Unit | Component | x-foo',
     // needs: ['component:foo', 'helper:bar'],
     unit: true
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       // creates the component instance
       let component = this.subject();
       // renders the component on the page

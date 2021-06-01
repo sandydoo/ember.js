@@ -7,10 +7,10 @@ describeComponent('foo/bar-baz', 'helper:foo/bar-baz',
   {
     integration: true
   },
-  function() {
-    it('renders', function() {
+  function () {
+    it('renders', function () {
       // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
+      // Handle any actions with this.on('myAction', function (val) { ... });
       // Template block usage:
       // this.render(hbs`
       //   {{#foo/bar-baz}}
@@ -25,4 +25,3 @@ describeComponent('foo/bar-baz', 'helper:foo/bar-baz',
     });
   }
 );
-

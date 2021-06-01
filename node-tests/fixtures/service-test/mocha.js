@@ -6,9 +6,9 @@ describeModule('service:foo', 'Unit | Service | foo',
     // Specify the other units that are required for this test.
     // needs: ['service:foo']
   },
-  function() {
+  function () {
     // TODO: Replace this with your real tests.
-    it('exists', function() {
+    it('exists', function () {
       let service = this.subject();
       expect(service).to.be.ok;
     });

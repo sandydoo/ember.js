@@ -432,7 +432,7 @@ describe('Blueprint: route', function () {
         expect(_file('tests/unit/routes/foo/bar-test.js')).to.not.exist;
 
         expect(file('tests/dummy/app/router.js'))
-          .to.contain("this.route('foo', function() {")
+          .to.contain("this.route('foo', function () {")
           .to.contain("this.route('bar')");
       }).then(() => {
         expect(file('tests/dummy/app/router.js')).to.not.contain("this.route('bar')");
@@ -913,7 +913,7 @@ describe('Blueprint: route', function () {
         expect(_file('tests/unit/routes/foo/bar-test.js')).to.not.exist;
 
         expect(file('tests/dummy/app/router.js'))
-          .to.contain("this.route('foo', function() {")
+          .to.contain("this.route('foo', function () {")
           .to.contain("this.route('bar')");
       }).then(() => {
         expect(file('tests/dummy/app/router.js')).to.not.contain("this.route('bar')");
